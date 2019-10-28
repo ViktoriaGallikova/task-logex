@@ -1,0 +1,53 @@
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="city">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> City </th>
+    <td mat-cell *matCellDef="let element"> {{element.location.city}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="postcode">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Postcode </th>
+    <td mat-cell *matCellDef="let element"> {{element.location.zipcode}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="address">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
+    <td mat-cell *matCellDef="let element"> {{element.location.adress}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="start_year">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Start year </th>
+    <td mat-cell *matCellDef="let element">
+      {{element.dates.startdate ? element.dates.startdate : '-'}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)='showDetail(row)'></tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Details:
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    test
+  </mat-expansion-panel>
+</mat-accordion>
