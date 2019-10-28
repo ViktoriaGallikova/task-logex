@@ -5,34 +5,40 @@
 <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
   <ng-container matColumnDef="position">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
-    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+    <td mat-cell *matCellDef="let element"><span class="type-table">Id:</span>{{element.position}}
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="title">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+    <td mat-cell *matCellDef="let element"><span class="type-table">Title:</span>{{element.title}}
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="city">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> City </th>
-    <td mat-cell *matCellDef="let element"> {{element.location.city}} </td>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>City</th>
+    <td mat-cell *matCellDef="let element"><span
+        class="type-table">City:</span>{{element.location.city}} </td>
   </ng-container>
 
   <ng-container matColumnDef="postcode">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Postcode </th>
-    <td mat-cell *matCellDef="let element"> {{element.location.zipcode}} </td>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Postcode</th>
+    <td mat-cell *matCellDef="let element"><span
+        class="type-table">Postcode:</span>{{element.location.zipcode}} </td>
   </ng-container>
 
   <ng-container matColumnDef="address">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
-    <td mat-cell *matCellDef="let element"> {{element.location.adress}} </td>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Address</th>
+    <td mat-cell *matCellDef="let element"><span
+        class="type-table">Address:</span>{{element.location.adress}} </td>
   </ng-container>
 
   <ng-container matColumnDef="start_year">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Start year </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Start year</th>
     <td mat-cell *matCellDef="let element">
-      {{element.dates.startdate ? element.dates.startdate : '-'}} </td>
+      <span class="type-table">Start
+        year:</span>{{element.dates.startdate ? element.dates.startdate : '-'}} </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -41,13 +47,81 @@
 
 <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 
-<mat-accordion>
+<mat-accordion *ngIf="detail">
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Details:
+        <p class="type-detail">title:</p>
+        <p [innerHTML]="detail.title"></p>
       </mat-panel-title>
     </mat-expansion-panel-header>
-    test
+    <ul>
+      <li>
+        <h3>full address:</h3>
+        <ul>
+          <li *ngIf="detail.location.name" class="row">
+            <p class="type-detail">name:</p>
+            <p [innerHTML]="detail.location.name"></p>
+          </li>
+          <li *ngIf="detail.location.city" class="row">
+            <p class="type-detail">city:</p>
+            <p [innerHTML]="detail.location.city">city:</p>
+          </li>
+          <li *ngIf="detail.location.adress" class="row">
+            <p class="type-detail">adress:</p>
+            <p [innerHTML]="detail.location.adress">adress:</p>
+          </li>
+          <li *ngIf="detail.location.zipcode" class="row">
+            <p class="type-detail">zipcode:</p>
+            <p [innerHTML]="detail.location.zipcode">zipcode:</p>
+          </li>
+          <li *ngIf="detail.location.latitude" class="row">
+            <p class="type-detail">latitude:</p>
+            <p [innerHTML]="detail.location.latitude">latitude:</p>
+          </li>
+          <li *ngIf="detail.location.longitude" class="row">
+            <p class="type-detail">longitude:</p>
+            <p [innerHTML]="detail.location.longitude">longitude:</p>
+          </li>
+        </ul>
+      </li>
+      <li *ngIf="detail.urls.length > 0">
+        <h3>url:</h3>
+        <ul *ngFor="let url of detail.urls">
+          <li>
+            <a href="{{url}}">{{url}}</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <h3>details:</h3>
+        <ul>
+          <li *ngIf="detail.details.en.title" class="row">
+            <p class="type-detail">title:</p>
+            <p [innerHTML]="detail.details.en.title"></p>
+          </li>
+          <li *ngIf="detail.details.en.calendarsummary" class="row">
+            <p class="type-detail">calendarsummary:</p>
+            <p [innerHTML]="detail.details.en.calendarsummary"></p>
+          </li>
+          <li *ngIf="detail.details.en.language" class="row">
+            <p class="type-detail">language:</p>
+            <p [innerHTML]="detail.details.en.language"></p>
+          </li>
+          <li *ngIf="detail.details.en.longdescription" class="row">
+            <p class="type-detail">longdescription:</p>
+            <p [innerHTML]="detail.details.en.longdescription"></p>
+          </li>
+          <li *ngIf="detail.details.en.shortdescription" class="row">
+            <p class="type-detail">shortdescription:</p>
+            <p [innerHTML]="detail.details.en.shortdescription"></p>
+          </li>
+        </ul>
+      </li>
+      <li class="wrapper-slider" *ngIf="imageObject.length > 0">
+        <h3>media:</h3>
+        <ng-image-slider [images]="imageObject" #nav></ng-image-slider>
+      </li>
+    </ul>
   </mat-expansion-panel>
 </mat-accordion>

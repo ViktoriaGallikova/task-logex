@@ -12,10 +12,12 @@ import {
   MatInputModule,
   MatExpansionModule
 } from '@angular/material';
+import { NgImageSliderModule } from 'ng-image-slider';
 
 @NgModule({
   declarations: [AppComponent, TableComponent],
   imports: [
+    NgImageSliderModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

@@ -15,8 +15,8 @@ export class TableComponent implements OnInit {
   dataSource;
   displayedColumns: string[];
   panelOpenState: boolean;
-  detail = Object;
-
+  detail = false;
+  imageObject: Array<object> = [];
   constructor(private dataService: DataService) {}
 
   ngOnInit() {
@@ -43,9 +43,15 @@ export class TableComponent implements OnInit {
     ];
   }
   showDetail(detail) {
-    console.log(detail);
+    // console.log(detail);
 
     this.detail = detail;
+    detail.media.map(image => {
+      this.imageObject.push({
+        image: image.url,
+        thumbImage: image.url
+      });
+    });
   }
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();

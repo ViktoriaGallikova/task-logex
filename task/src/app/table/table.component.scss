@@ -1,6 +1,7 @@
 table {
   width: 100%;
 }
+
 th.mat-sort-header-sorted {
   color: black;
 }
@@ -8,4 +9,16 @@ th.mat-sort-header-sorted {
 .mat-form-field {
   font-size: 14px;
   width: 100%;
+}
+
+.mat-row {
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}
+
+.wrapper-slider {
+  max-width: 300px;
 }

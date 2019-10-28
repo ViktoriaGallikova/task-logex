@@ -40,3 +40,8 @@ ng add @angular/material
 ```
 ng g service data
 ```
+
+8. pouzila som image slider [link](https://www.npmjs.com/package/ng-image-slider)
+```
+npm i ng-image-slider
+```
